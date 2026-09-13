@@ -1,0 +1,38 @@
+const express = require("express");
+
+const {
+    createMission,
+    analyzeMission,
+    getMission
+} = require("../controllers/missionController");
+
+const authMiddleware = require("../middleware/authMiddleware");
+
+const router = express.Router();
+
+
+// Create mission
+router.post(
+    "/",
+    authMiddleware,
+    createMission
+);
+
+
+// Analyze mission
+router.post(
+    "/:id/analyze",
+    authMiddleware,
+    analyzeMission
+);
+
+
+// Get mission and its steps
+router.get(
+    "/:id",
+    authMiddleware,
+    getMission
+);
+
+
+module.exports = router;
